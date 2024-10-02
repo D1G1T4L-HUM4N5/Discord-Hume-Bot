@@ -144,7 +144,7 @@ function sendAudioChunk(base64Audio) {
 
 function playUnderstandingSound(connection) {
     console.log('Playing understood sound');
-    return playSound(connection, 'understood.wav');
+    return playSound(connection, 'Blip1.wav');
 }
 
 

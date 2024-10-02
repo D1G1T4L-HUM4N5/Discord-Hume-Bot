@@ -22,7 +22,7 @@ function initializeDiscordClient(client) {
     });
 
     client.on('messageCreate', async (message) => {
-        if (message.content === '!join' && message.member.voice.channel) {
+        if (message.content === '!summon' && message.member.voice.channel) {
             const connection = joinVoiceChannel({
                 channelId: message.member.voice.channel.id,
                 guildId: message.guild.id,
@@ -33,20 +33,20 @@ function initializeDiscordClient(client) {
                 log(`Joined voice channel of user ${message.member.id}`);
                 setupHumeAI(connection, client); // Pass 'client' here
             });
-        } else if (message.content === '!join') {
+        } else if (message.content === '!summon') {
             message.reply('You need to be in a voice channel to use this command.');
         }
     
-        // New !leave command
-        if (message.content === '!leave' && message.member.voice.channel) {
+        // New !disconnect  command
+        if (message.content === '!disconnect' && message.member.voice.channel) {
             const connection = getVoiceConnection(message.guild.id);
             if (connection) {
-                connection.destroy(); // Leave the voice channel
+                connection.destroy(); // disconnect  the voice channel
                 log(`Left voice channel of user ${message.member.id}`);
             } else {
                 message.reply('I am not in a voice channel.');
             }
-        } else if (message.content === '!leave') {
+        } else if (message.content === 'disconnect') {
             message.reply('You need to be in a voice channel to use this command.');
         }
     });
